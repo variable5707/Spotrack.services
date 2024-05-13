@@ -49,7 +49,7 @@ exports.addEnquiryRequest = async (req, res, next) => {
       logging: console.log,
     });
     if (response.length > 0) {
-      responseObject.result = response;
+      responseObject.result = response[0];
       responseObject.error = false;
       responseObject.status = "Success";
     } else {

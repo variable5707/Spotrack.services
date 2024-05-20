@@ -352,7 +352,7 @@ templateMail = (username, subject, mailTitle,name, mail, message)=>{
                                                   <td align="center" class="x_subheader-text"
                                                       style="font-size:0px; padding:0px; word-break:break-word">
                                                       <div
-                                                          style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 14px; line-height: 24px; text-align: center; color: rgb(102, 112, 133);">
+                                                          style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 18px; line-height: 24px; text-align: center; color: rgb(102, 112, 133);">
                                                           <b>  Name  :- ${name},<br>Email : ${mail} <br> Message :-${message}
                                                       </div>
                                                   </td>

@@ -1,4 +1,10 @@
 var connection = require("../db/connection");
+let mailer = require("../utils/nodemailer");
+let inquiryMail = require("../utils/Mails/inquiryMail");
+let mailSendIds = [
+  "info@suugam.com",
+  "gopal@suugam.com"
+]
 
 exports.addEnquiryRequest = async (req, res, next) => {
   try {
@@ -52,6 +58,10 @@ exports.addEnquiryRequest = async (req, res, next) => {
       responseObject.result = response[0];
       responseObject.error = false;
       responseObject.status = "Success";
+      let mailSent = await mailer.transporter.sendMail(
+        inquiryMail(mailSendIds,  email, name , message)
+      );
+
     } else {
       responseObject.result = {
         result: "Something Went Wrong. Please Try Again !!",
@@ -68,4 +78,5 @@ exports.addEnquiryRequest = async (req, res, next) => {
   }
 
   res.status(responseCode).json(responseObject);
+  
 };

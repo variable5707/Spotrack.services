@@ -1,4 +1,16 @@
-templateMail = (username, subject, mailTitle,name, mail, message)=>{
+templateMail = (username, subject, mailTitle,name, mail, message, attachment)=>{
+
+    if (attachment && attachment.length >0 ){
+        return {
+                from: process.env.email,
+                to: username,
+                    subject: subject,
+                    text: 'Please find the attached resume file',
+                    attachments: attachment
+                  }
+    }
+
+else {
     return{
         from: process.env.email,
   to: username,
@@ -506,5 +518,6 @@ templateMail = (username, subject, mailTitle,name, mail, message)=>{
 </div>`
     }
 };
+}
 
 module.exports = templateMail;

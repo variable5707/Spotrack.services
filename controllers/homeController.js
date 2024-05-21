@@ -1,14 +1,16 @@
 var connection = require("../db/connection");
 let mailer = require("../utils/nodemailer");
 let inquiryMail = require("../utils/Mails/inquiryMail");
-let mailSendIds = [
-  "info@suugam.com",
-  "gopal@suugam.com"
-]
+let resumeMail = require("../utils/Mails/resumeMail");
+
 
 exports.addEnquiryRequest = async (req, res, next) => {
   try {
     console.log("adding Enquiry");
+    let mailSendIds = [
+      "info@suugam.com",
+      "ankkit9@suugam.com"
+    ]
     var responseObject = {};
     var responseCode = 200;
     var err = {};
@@ -69,6 +71,64 @@ exports.addEnquiryRequest = async (req, res, next) => {
       responseObject.error = true;
       responseObject.status = "Failure";
     }
+  } catch (err) {
+    console.log(err);
+    responseObject.result = { result: "Something Went Wrong. Please Try Again !!", };
+    responseObject.error = true;
+    responseObject.status = "Failure";
+    responseCode = 400;
+  }
+
+  res.status(responseCode).json(responseObject);
+  
+};
+exports.addCarrierInquiry = async (req, res, next) => {
+  try {
+    console.log("adding REsume");
+    let mailSendIds = [
+      "info@suugam.com",
+      "hr@suugam.com"
+    ]
+    var responseObject = {};
+    var responseCode = 200;
+    var err = {};
+    const file = req.file;
+
+    if (!file) {
+      responseObject.result = { result: "Something Went Wrong. Please Try Again !!", };
+      responseObject.error = true;
+      responseObject.status = "Failure";
+      responseCode = 400;
+      return res.status(responseCode).json(responseObject);
+    }
+        let attachments =  [
+          {
+            filename: file.uploadName,
+            path: file.path
+          }
+        ]
+
+    let mailSent = await mailer.transporter.sendMail(resumeMail(mailSendIds, attachments), (error, info) => {
+          if (error) {
+            responseObject.result = { result: "Something Went Wrong. Please Try Again !!", };
+            responseObject.error = true;
+            responseObject.status = "Failure";
+            responseCode = 400;
+            res.status(responseCode).json(responseObject);
+          }
+          responseObject.result = {result : "file Uploaded Successfully"};
+      responseObject.error = false;
+      responseObject.status = "Success";
+        });
+
+    
+
+      responseObject.result = {result : "file Uploaded Successfully"};
+      responseObject.error = false;
+      responseObject.status = "Success";
+  
+
+  
   } catch (err) {
     console.log(err);
     responseObject.result = { result: "Something Went Wrong. Please Try Again !!", };

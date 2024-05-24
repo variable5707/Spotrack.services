@@ -6,6 +6,10 @@ router.post(
   "/addEnquiryRequest",
   homeController.addEnquiryRequest
 );
+router.get(
+  "/getEnquiryRequest",
+  homeController.getEnquiryRequest
+);
 router.post(
   "/addCarrierInquiry",
   upload.single('file'),

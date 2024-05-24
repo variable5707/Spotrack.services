@@ -4,6 +4,49 @@ let inquiryMail = require("../utils/Mails/inquiryMail");
 let resumeMail = require("../utils/Mails/resumeMail");
 
 
+exports.getEnquiryRequest = async (req, res, next) => {
+  try {
+    console.log("Getting Enquiry");
+    var responseObject = {};
+    var responseCode = 200;
+
+
+    var replacementArray =[]
+
+
+    let paramaters = ``;
+
+    var Query = " exec [dbo].[sp_get_all_inquiries]" + paramaters;
+    let response = await connection.query(Query, {
+      raw: true,
+      replacements: replacementArray,
+      type: connection.QueryTypes.SELECT,
+      logging: console.log,
+    });
+    if (response.length > 0) {
+      responseObject.result = response;
+      responseObject.error = false;
+      responseObject.status = "Success";
+
+
+    } else {
+      responseObject.result = {
+        result: "Something Went Wrong. Please Try Again !!",
+      };
+      responseObject.error = true;
+      responseObject.status = "Failure";
+    }
+  } catch (err) {
+    console.log(err);
+    responseObject.result = { result: "Something Went Wrong. Please Try Again !!", };
+    responseObject.error = true;
+    responseObject.status = "Failure";
+    responseCode = 400;
+  }
+
+  res.status(responseCode).json(responseObject);
+  
+};
 exports.addEnquiryRequest = async (req, res, next) => {
   try {
     console.log("adding Enquiry");

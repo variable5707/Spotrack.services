@@ -5,7 +5,12 @@ templateMail = (username, subject, mailTitle,name, mail, message, attachment)=>{
                 from: process.env.email,
                 to: username,
                     subject: subject,
-                    text: 'Please find the attached resume file',
+                    text: `
+                    ${mailTitle}
+                    ${name}
+                    ${mail}
+                    ${message}
+                    `,
                     attachments: attachment
                   }
     }
@@ -365,7 +370,8 @@ else {
                                                       style="font-size:0px; padding:0px; word-break:break-word">
                                                       <div
                                                           style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 18px; line-height: 24px; text-align: center; color: rgb(102, 112, 133);">
-                                                          <b>  Name  :- ${name},<br>Email : ${mail} <br> Message :-${message}
+                                                          <b>  Name  :- ${name},<br>Email : ${mail} <br>
+                                                          ${message}
                                                       </div>
                                                   </td>
                                               </tr>

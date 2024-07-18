@@ -12,7 +12,7 @@ router.get(
 );
 router.post(
   "/addCarrierInquiry",
-  upload.single('file'),
+  upload.single('resume'),
   homeController.addCarrierInquiry
 );
 

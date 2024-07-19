@@ -51,9 +51,9 @@ exports.addEnquiryRequest = async (req, res, next) => {
   try {
     console.log("adding Enquiry");
     let mailSendIds = [
-      // "info@suugam.com",
+      "info@suugam.com",
     // "ankkit9@suugam.com",
-    "mohit@suugam.com"
+    // "mohit@suugam.com"
     ]
     var responseObject = {};
     var responseCode = 200;
@@ -130,9 +130,9 @@ exports.addCarrierInquiry = async (req, res, next) => {
   try {
     console.log("adding REsume");
     let mailSendIds = [
-      // "info@suugam.com",
+      "info@suugam.com",
       // "hr@suugam.com"
-      "mohit@suugam.com"
+      // "mohit@suugam.com"
     ]
     var responseObject = {};
     var responseCode = 200;
